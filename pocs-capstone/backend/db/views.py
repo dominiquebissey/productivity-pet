@@ -260,8 +260,8 @@ class CustomUserCreate(APIView):
             if newuser:
                 try:
                     send_email(request.data['email'])
-                except:
-                    print("Oops! Registration email failed to send")
+                except Exception as e:
+                    print(f"Oops! Registration email failed to send, eror: {e}")
                 return Response(status=status.HTTP_201_CREATED)
 
         print(registration_serializer.errors)
