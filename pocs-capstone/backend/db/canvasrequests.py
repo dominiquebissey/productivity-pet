@@ -2,6 +2,7 @@
 import requests
 import bs4 as bs
 import pprint
+from datetime import datetime
 # import re
 # from dateutil import parser
 pp = pprint.PrettyPrinter(indent=2)
@@ -39,11 +40,24 @@ def get_courses(canvas_token):  # later we'll add userId as a parameter
 
     if status == 200:
         course_id_list = []  # a list of all the user's courses (their ids)
-
+        current_date = datetime.now().date()
+        closest_start_date = None
+        
         for course_entry in courses_data:
-            course = (course_entry['id'], course_entry['name'])
-            course_id_list.append(course)
-
+            course_end_date = None
+            if course_entry['end_at'] is not None and course_entry['start_at'] is not None:
+                course_end_date = datetime.fromisoformat(course_entry['end_at'][:-1]).date()
+                if course_end_date >= current_date:
+                    start_date = datetime.fromisoformat(course_entry['start_at'][:-1]).date()
+                    if closest_start_date is None or abs(current_date - start_date) < abs(current_date - closest_start_date):
+                        closest_start_date = start_date
+        
+        for course_entry in courses_data:
+            created_date = datetime.fromisoformat(course_entry['created_at'][:-1]).date()
+            difference = abs((created_date - closest_start_date).days)
+            if difference < 35:
+                course = (course_entry['id'], course_entry['name'])
+                course_id_list.append(course)
         return course_id_list, status
     return None, status
 
