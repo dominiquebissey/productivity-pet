@@ -2,7 +2,7 @@
 import requests
 import bs4 as bs
 import pprint
-from datetime import datetime
+from datetime import datetime, timezone
 # import re
 # from dateutil import parser
 pp = pprint.PrettyPrinter(indent=2)
@@ -187,21 +187,44 @@ def get_course_info(canvas_token, course_id):
 
 
 def parse_assignments(assignments, course_title):
-
     tasks = []
+    format_string = "%Y-%m-%dT%H:%M:%SZ"
+    current_UTC = datetime.now(timezone.utc)
 
     for a in assignments:
         submission_details = {}
 
         due = a['due_at']
         submission_details = a['submission']
+        graded = None
+
+        if submission_details.get('grade','Done') is not None:
+            if submission_details.get('grade','Done') != 'Done':
+                graded = True
+            else:
+                if a['submission_types'] == ['none'] and due == None:
+                    graded = True
+                else:
+                    graded = False
+        else:
+            if a['submission_types'] == ['none'] and due == None:
+                graded = True
+            else:
+                graded = False
 
         submitted = submission_details['submitted_at']
 
         if due != None:
             due = due[0:10]  # hack into a string UwU
+
         if submitted != None:
             submitted = submitted[0:10]  # hack into a string UwU
+        elif submitted == None and graded == True:
+            if submission_details.get('graded_at', None) is not None:
+                submitted = submission_details['graded_at'][0:10]
+            else: 
+                submitted = current_UTC.strftime(format_string)[0:10]
+        
 
         try:
             description = bs.BeautifulSoup(a['description'], 'lxml').get_text()
@@ -242,5 +265,4 @@ def get_all_assignments(canvas_token):
         #    all_assignments.append(assignment_info) # add each assignment dict from this course to list
         _assignments = parse_assignments(assignments, course[1])
         all_assignments = all_assignments+_assignments
-
     return all_assignments, status
