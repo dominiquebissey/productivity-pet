@@ -181,24 +181,22 @@ def detect_task_type(assignment):
         return 'Q'  # Quiz
 
     # 2. Keyword matching in title
-    if any(word in name for word in ['final exam', 'midterm', 'final test', 'exam', 'test', 'mid-term']):
-        return 'T'
-    if 'quiz' in name:
-        return 'Q'
-    if any(word in name for word in ['homework', 'hw ', 'assignment', 'problem set', 'pset']):
-        return 'H'
-    if 'discussion' in name or 'forum' in name:
-        return 'D'
+    if any(word in name for word in ['final exam', 'midterm', 'final test', 'exam', 'test', 'mid-term', 'final']):
+        return 'C'
+    if 'quiz' in name or 'vsq' in name:
+        return 'L'
+    if any(word in name for word in ['homework', 'hw ', 'assignment', 'problem set', 'pset', 'discussion', 'forum']):
+        return 'M'
 
     # 3. Check description
     if description:
-        if 'quiz' in description:
-            return 'Q'
-        if 'exam' in description or 'test' in description:
-            return 'T'
+        if any(word in description for word in ['final exam', 'midterm', 'final test', 'exam', 'test', 'mid-term', 'final']):
+            return 'C'
+        if 'quiz' in description or 'vsq' in description:
+            return 'L'
 
     # 4. Default
-    return 'H'  # Most things are homework/assignments
+    return 'S'  # Most things are homework/assignments
 
 
 '''Given a course ID and assignment ID, return a dict of assignment information for that particular assignment'''
@@ -230,7 +228,6 @@ def parse_assignments(assignments, course_title):
 
         tasks.append({'title': a['name'] or "No title.",
                       'due_date': due,
-
                       'task_type': task_type,
                       # 'task_level': 1, # TODO - this should be set here!
                       # 'recurring': 'false',
