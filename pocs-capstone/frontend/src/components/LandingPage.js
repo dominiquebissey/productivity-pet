@@ -46,8 +46,8 @@ const LandingPage = () => {
         <div className="landingpage" style={{width: width}}>
         <h1 style={{ marginTop: "35px"}}><center><div className= "titlebox">WELCOME TO PRODUCTIVITY PET!</div></center></h1>
         <img src={browndog} alt="dog" className='image' style={{width: "375px", height: "500px" }} />
-       <center><Card className = "card" style={{width: '35rem'}}>
-            <Card.Title>About</Card.Title>
+       <center><Card className = "landing-card" style={{width: '35rem'}}>
+            <Card.Title style={{fontSize: "1.5rem", fontWeight: "bold"}}>About</Card.Title>
             <Card.Body>
                 Productivity Pet allows you to take care of a virtual pet to achieve your academic goals! Choose from a variety of pets 
                 to find the one who suits you best. By completing tasks, you can receive candies of various sizes to feed your pet. Watch it grow and level up! 
