@@ -23,9 +23,9 @@ import { useNavigate } from "react-router-dom";
 import { useWindowWidth, useWindowHeight } from "@react-hook/window-size";
 import { Card } from "react-bootstrap";
 
-var YESTERDAY = new Date(Date.now() - 86400000);
+var YESTERDAY = new Date(Date.now() + 2 * 86400000);
 
-var TODAY = new Date();
+var TODAY = new Date(Date.now() + 2* 86400000);
 //TODAY.setDate(TODAY.toISOString().split('T')[0])
 
 console.log(
