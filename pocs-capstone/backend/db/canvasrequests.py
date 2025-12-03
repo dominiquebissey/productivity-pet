@@ -41,24 +41,40 @@ def get_courses(canvas_token):  # later we'll add userId as a parameter
     if status == 200:
         course_id_list = []  # a list of all the user's courses (their ids)
         current_date = datetime.now().date()
+        closest_end_date = None
         closest_start_date = None
         
         for course_entry in courses_data:
             course_end_date = None
-            if course_entry['end_at'] is not None and course_entry['start_at'] is not None:
+            if course_entry['end_at'] is not None:
                 course_end_date = datetime.fromisoformat(course_entry['end_at'][:-1]).date()
                 if course_end_date >= current_date:
-                    start_date = datetime.fromisoformat(course_entry['start_at'][:-1]).date()
-                    if closest_start_date is None or abs(current_date - start_date) < abs(current_date - closest_start_date):
-                        closest_start_date = start_date
+                    if closest_end_date is None or course_end_date < closest_end_date:
+                        closest_end_date = course_end_date
         
+        if closest_end_date is not None:
+            for course_entry in courses_data:
+                course_start_date = None
+                if course_entry['start_at'] is not None:
+                    course_start_date = datetime.fromisoformat(course_entry['start_at'][:-1]).date()
+                    if course_start_date <= closest_end_date:
+                        if closest_start_date is None or course_start_date > closest_start_date:
+                            closest_start_date = course_start_date
+                
+        if closest_start_date is None:
+            closest_start_date = current_date
+            
         for course_entry in courses_data:
             created_date = datetime.fromisoformat(course_entry['created_at'][:-1]).date()
             difference = abs((created_date - closest_start_date).days)
-            if difference < 35:
+            difference_to_today = abs((created_date - current_date).days)
+            if difference < 35 and difference_to_today < 200:
                 course = (course_entry['id'], course_entry['name'])
                 course_id_list.append(course)
-        return course_id_list, status
+        print(course_id_list)
+        if len(course_id_list) > 0:
+            return course_id_list, status
+        return None, status
     return None, status
 
 
