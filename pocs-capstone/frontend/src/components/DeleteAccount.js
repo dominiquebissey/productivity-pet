@@ -1,13 +1,15 @@
-import React from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Button, Card } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
+import AvatarContext from "../context/AvatarContext";
 
 function DeleteAccount() {
+    const contextHandler = useContext(AvatarContext);
     const axiosPrivate = useAxiosPrivate();
     const navigate = useNavigate();
 
-    const petName = axiosPrivate.get("/avatar/").then(res => res.data.pet_name).catch(() => "your pet");
+    // const petName = axiosPrivate.get("/avatar/").then(res => res.data.name).catch(() => "your pet");
 
     const handleDelete = async () => {
         if (!window.confirm("You're really going to abandon your pet?")) {
@@ -21,8 +23,8 @@ function DeleteAccount() {
                 localStorage.removeItem("refresh");
                 localStorage.removeItem("persist");
 
-                // Redirect to login
-                navigate("/login");
+                // Redirect to registration page
+                navigate("/register");
             }
         } catch (err) {
         console.error("Delete error:", err);
@@ -35,7 +37,7 @@ function DeleteAccount() {
     };
 
   return (
-    <div style={{ display: "flex", justifyContent: "center", marginTop: "50px" }}>
+    <div style={{ display: "flex", justifyContent: "center", marginTop: "50px", marginBottom: "50px" }}>
         <Card style={{ padding: "20px", width: "200px" }}>
             <h3>Delete Account</h3>
             <p>This action is permanent and cannot be undone.</p>
@@ -47,7 +49,7 @@ function DeleteAccount() {
             <h3>Return</h3>
             <p>Decided not to delete your account?</p>
             <Button variant="light" onClick={handleReturn}>
-            Return to {petName}
+            Return to your pet
             </Button>
         </Card>
     </div>

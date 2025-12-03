@@ -11,6 +11,7 @@
 node_modules
 pocs-capstone/backend/.env
 pocs-capstone/backend/tutorial-env/
+pocs-capstone/backend/henry_env/
 pocs-capstone/backend/db/__pycache__/
 pocs-capstone/backend/db/migrations/
 pocs-capstone/backend/backend/__pycache__/
