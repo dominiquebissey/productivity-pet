@@ -171,6 +171,7 @@ const Header = ({ }) => {
             </NavDropdown.Item>
             <NavDropdown.Divider />
             <NavDropdown.Item href="/logout">Logout</NavDropdown.Item>
+            <NavDropdown.Item href="/delete_account">Delete Account</NavDropdown.Item>
           </NavDropdown>
         </div>
       </Stack>

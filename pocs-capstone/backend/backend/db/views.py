@@ -380,6 +380,19 @@ class NewUserViewSet(viewsets.ModelViewSet):
         _user = self.request.user.id
         return NewUser.objects.filter(id=_user)
 
+class DeleteUserView(APIView):
+    permission_classes = [IsAuthenticated,]
+
+    def delete(self, request):
+
+        try:
+            user = request.user
+            user.delete()
+            return Response(status=status.HTTP_204_NO_CONTENT)
+        except Exception as e:
+            print(e)
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+
 
 class TaskViewSet(viewsets.ModelViewSet):
 
@@ -393,19 +406,6 @@ class TaskViewSet(viewsets.ModelViewSet):
         _user = self.request.user
         return Task.objects.filter(user=_user)
 
-class DeleteUserView(APIView):
-    permission_classes = [IsAuthenticated,]
-
-    def delete(self, request):
-
-        try:
-            user = request.user
-            print("Deleteing user:", user)
-            user.delete()
-            return Response(status=status.HTTP_204_NO_CONTENT)
-        except Exception as e:
-            print(e)
-            return Response(status=status.HTTP_400_BAD_REQUEST)
 
 class AvatarViewSet(viewsets.ModelViewSet):
 
