@@ -262,10 +262,20 @@ class CustomUserCreate(APIView):
         if registration_serializer.is_valid():
             newuser = registration_serializer.save()
             if newuser:
-                try:
-                    send_email(request.data['email'])
-                except:
-                    print("Oops! Registration email failed to send")
+                user_email = request.data.get('email')
+
+                if user_email:
+                    try:
+                        send_email(user_email)
+                    except Exception as e:
+                        print(f"Oops! Registration email failed to send: {e}")
+
+                    # Canvas assignments reminder email
+                    try:
+                        send_assignment_reminder_email(user_email, days_ahead=7)
+                    except Exception as e:
+                        print(f"Oops! Assignment reminder email failed to send: {e}")
+
                 return Response(status=status.HTTP_201_CREATED)
 
         print(registration_serializer.errors)
@@ -290,37 +300,34 @@ class BlacklistTokenView(APIView):
             return Response(e, status=status.HTTP_400_BAD_REQUEST)
 
 
-class CustomUserCreate(APIView):
-    permission_classes = [AllowAny]
+class CanvasView(APIView):
+    permission_classes = [IsAuthenticated,]
 
-    def post(self, request):
-        registration_serializer = RegisterUserSerializer(data=request.data)
-        if registration_serializer.is_valid():
-            newuser = registration_serializer.save()
-            if newuser:
-                user_email = request.data.get('email')
+    def __enter_inventory_item(self, _user, old_date, new_task):
 
-                if user_email:
-                    try:
-                        send_email(user_email)
-                    except Exception as e:
-                        print(f"Oops! Registration email failed to send: {e}")
+        if ((old_date != None) and (new_task.completed_date != None)):
+            new_task.completed = True
+            new_task.save()
+            return
 
-                    # Canvas assignments reminder email
-                    try:
-                        send_assignment_reminder_email(user_email, days_ahead=7)
-                    except Exception as e:
-                        print(f"Oops! Assignment reminder email failed to send: {e}")
+        if old_date == None:
+            if new_task.completed_date != None:  # first time completed
 
-                return Response(status=status.HTTP_201_CREATED)
+                new_task.completed = True  # The task has officially been completed!
+                new_task.save()
 
-        print(registration_serializer.errors)
-        errors = registration_serializer.errors
-        if ('email' in errors.keys()):
-            return Response("Email is taken", status=status.HTTP_409_CONFLICT)
-        if ('username' in errors.keys()):
-            return Response("Username is taken", status=status.HTTP_409_CONFLICT)
-        return Response(registration_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+                try:
+                    obj = Inventory.objects.get(
+                        user=_user, candy_base_type=new_task.task_type, candy_level=new_task.task_level)
+                    updated_quantity = obj.quantity + 1
+                    obj.quantity = updated_quantity
+                    obj.save()  # inventory is updated
+
+                except Inventory.DoesNotExist:
+                    obj = Inventory(
+                        user=_user, candy_base_type=new_task.task_type, candy_level=new_task.task_level, quantity=1)
+                    obj.save()  # new inventory item now created
+        pass
 
     def get(self, request):
 
