@@ -95,7 +95,6 @@ def get_upcoming_canvas_assignments(days_ahead: int = 7):
                 continue
 
             try:
-                # Canvas returns ISO 8601 strings, often ending in "Z"
                 due_at = datetime.fromisoformat(due_at_str.replace("Z", "+00:00"))
             except ValueError:
                 # If parsing fails, skip this assignment
@@ -241,7 +240,7 @@ def send_assignment_reminder_email(email_receiver: str, days_ahead: int = 7):
         print(f"[Email] Failed to send assignment reminder: {e}")
 
 
-##If quizzes are quizical then what are tests?
+##Tests
 if __name__ == "__main__":
     test_email = "oswaynesmith34@gmail.com"
     send_assignment_reminder_email(test_email, days_ahead=7)
