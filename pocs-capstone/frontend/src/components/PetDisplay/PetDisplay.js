@@ -28,10 +28,10 @@ import whitedog_S_gif from "../../images/white_dog_sad_scaled_8x.gif";
 
 import { useContext, useEffect, useRef, useState } from "react";
 
-import bgimage from "../../images/bg.gif";
+import bgimage from "../../images/background.png";
 import ProgressBar from "react-bootstrap/ProgressBar";
-import browndog_click from "../../images/brown_dog_scaled_8x.png";
-import whitedog_click from "../../images/white_dog_scaled_8x.png";
+import browndog_click from "../../images/brown_dog_hi_b_scaled_8x.png";
+import whitedog_click from "../../images/white_dog_hi_b_scaled_8x.png";
 import orange_click from "../../images/orange_cat_hi_scaled_5x_pngcrushed.png";
 import gray_click from "../../images/gray_cat_hi_scaled_5x_pngcrushed.png";
 import white_click from "../../images/white_cat_hi_scaled_5x_pngcrushed.png";
