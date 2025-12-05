@@ -198,6 +198,36 @@ def get_course_info(canvas_token, course_id):
     course_url = BASE_URL + '/courses/' + str(course_id)
     return canvas_request(url=course_url, headers=auth_header, params={})
 
+'''Given an assignment, Detects the type based on Canvas data. Returns a single char code'''
+
+def detect_task_type(assignment):
+
+    name = (assignment.get('name') or "").lower()
+    description = (assignment.get('description') or "").lower()
+    submission_types = assignment.get('submission_types', [])
+
+    # 1. Canvas Quizzes
+    if assignment.get('quiz_id') is not None or "online_quiz" in submission_types:
+        return 'Q'  # Quiz
+
+    # 2. Keyword matching in title
+    if any(word in name for word in ['final exam', 'midterm', 'final test', 'exam', 'test', 'mid-term', 'final']):
+        return 'C'
+    if 'quiz' in name or 'vsq' in name:
+        return 'L'
+    if any(word in name for word in ['homework', 'hw ', 'assignment', 'problem set', 'pset', 'discussion', 'forum']):
+        return 'M'
+
+    # 3. Check description
+    if description:
+        if any(word in description for word in ['final exam', 'midterm', 'final test', 'exam', 'test', 'mid-term', 'final']):
+            return 'C'
+        if 'quiz' in description or 'vsq' in description:
+            return 'L'
+
+    # 4. Default
+    return 'S'  # Most things are homework/assignments
+
 
 '''Given a course ID and assignment ID, return a dict of assignment information for that particular assignment'''
 
@@ -247,10 +277,11 @@ def parse_assignments(assignments, course_title):
         except Exception as e:
             description = ""
 
+        task_type = detect_task_type(a)
+
         tasks.append({'title': a['name'] or "No title.",
                       'due_date': due,
-
-                      'task_type': 'S',
+                      'task_type': task_type,
                       # 'task_level': 1, # TODO - this should be set here!
                       # 'recurring': 'false',
                       # 'recurring_time_delta': 0,
