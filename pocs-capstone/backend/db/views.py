@@ -15,6 +15,10 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from db.studybuddyemail import send_email
 import db.canvasrequests as canvas
 import pprint
+from db.studybuddyemail import send_email
+from db.assignment_reminder_email import send_assignment_reminder_email 
+import db.canvasrequests as canvas
+import pprint
 
 pp = pprint.PrettyPrinter(indent=2)
 
