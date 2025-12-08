@@ -44,14 +44,14 @@ const LandingPage = () => {
     }
     return (
         <div className="landingpage" style={{width: width}}>
-        <h1 style={{ marginTop: "35px"}}><center><div className= "titlebox">WELCOME TO TASK PET!</div></center></h1>
+        <h1 style={{ marginTop: "35px"}}><center><div className= "titlebox">WELCOME TO PRODUCTIVITY PET!</div></center></h1>
         <img src={browndog} alt="dog" className='image' style={{width: "375px", height: "500px" }} />
        <center><Card className = "landing-card" style={{width: '35rem'}}>
             <Card.Title style={{fontSize: "1.5rem", fontWeight: "bold"}}>About</Card.Title>
             <Card.Body>
-                Task Pet allows you to take care of a virtual pet to achieve your academic goals! Choose from a variety of pets 
+                Productivity Pet allows you to take care of a virtual pet to achieve your academic goals! Choose from a variety of pets 
                 to find the one who suits you best. By completing tasks, you can receive candies of various sizes to feed your pet. Watch it grow and level up! 
-                Integrate your Canvas account so your pet can help you keep track of your school assignments. With Task Pet, you get a cute 
+                Integrate your Canvas account so your pet can help you keep track of your school assignments. With Productivity Pet, you get a cute 
                 way to make keeping up with your schoolwork and personal study goals fun! Click on the buttons below to register or log in to see your pet.
             </Card.Body>
            

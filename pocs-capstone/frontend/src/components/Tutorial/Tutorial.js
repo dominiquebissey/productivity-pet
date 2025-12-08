@@ -138,7 +138,7 @@ const Tutorial = () => {
     <div className="alice-box">
       {" "}
       <div className="header-tut">
-        <div className="header-text-tut">How To Use Task Pet!</div>
+        <div className="header-text-tut">How To Use Productivity Pet!</div>
       </div>
       <img className="tut-image" alt="active tasks" src={active_tasks}></img>
       <div className="tut-textbox">
@@ -260,7 +260,7 @@ const Tutorial = () => {
     <div className="alice-box">
       <div className="proceed-header">
         <h1 style={{ fontSize: 50 }}>
-          <center>WELCOME TO TASK PET!</center>
+          <center>WELCOME TO PRODUCTIVITY PET!</center>
         </h1>
       </div>
       <img src={browndog} alt="browndog" className="tut-image-kitty-mobile" />
