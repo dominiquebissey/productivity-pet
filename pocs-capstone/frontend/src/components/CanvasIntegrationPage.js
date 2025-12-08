@@ -155,7 +155,7 @@ const CanvasIntegrationPage = () => {
           <hr />
           <center><Card className = "canvas_card" style={{width: '30rem'}}>
           <Card.Title>
-            Follow these steps to link your Canvas account with Task Pet! {" "}
+            Follow these steps to link your Canvas account with Productivity Pet! {" "}
           </Card.Title>
           <Card.Body >
             <p>
@@ -170,7 +170,7 @@ const CanvasIntegrationPage = () => {
             bottom!
             <p></p> Select "New access token".
             <p></p> <img src={new_access_token} alt="+ New access token"></img>
-            <p></p> 4. Enter a purpose and expiration date (ex. task pet, and
+            <p></p> 4. Enter a purpose and expiration date (ex. productivity pet, and
             the end of your semester date).
             <p></p> Select "Generate token", and copy and paste it here!
             <div>

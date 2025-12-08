@@ -37,15 +37,15 @@ function DeleteAccount() {
     };
 
   return (
-    <div style={{ display: "flex", justifyContent: "center", marginTop: "50px", marginBottom: "50px" }}>
-        <Card style={{ padding: "20px", width: "200px" }}>
+    <div style={{ display: "flex", justifyContent: "center", marginTop: "50px", marginBottom: "540px" }}>
+        <Card style={{ padding: "40px", width: "300px" }}>
             <h3>Delete Account</h3>
             <p>This action is permanent and cannot be undone.</p>
             <Button variant="danger" onClick={handleDelete}>
             Delete My Account
             </Button>
         </Card>
-        <Card style={{ padding: "20px", width: "200px", marginLeft: "20px" }}>
+        <Card style={{ padding: "40px", width: "300px", marginLeft: "60px" }}>
             <h3>Return</h3>
             <p>Decided not to delete your account?</p>
             <Button variant="light" onClick={handleReturn}>

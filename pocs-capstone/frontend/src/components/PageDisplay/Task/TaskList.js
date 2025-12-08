@@ -57,7 +57,7 @@ const TaskList = ({ showAll, filterTags, filterTaskType }) => {
             {
                 showTasks.length === 0 ?
                     <ListGroup className='tasklist-position' variant="flush">
-                        <ListGroup.Item className="d-flex justify-content-between align-items-start" style={{ backgroundColor: 'rgb(255, 214, 214' }}>
+                        <ListGroup.Item className="d-flex justify-content-between align-items-start" style={{ backgroundColor: 'rgb(255, 214, 214', fontSize: "1.1rem"}}>
                             No tasks!
                         </ListGroup.Item>
                     </ListGroup>
