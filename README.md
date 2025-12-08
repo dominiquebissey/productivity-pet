@@ -111,7 +111,7 @@ npm start
 8. In your browser, navigate in the search bar to <a href="http://localhost:3000">http://localhost:3000</a>.
 
 
-## Collaborators
+## Collaborators on Origional Project
 
 [//]: # ( readme: collaborators -start )
 <table>
@@ -169,3 +169,10 @@ npm start
 </table>
 
 [//]: # ( readme: collaborators -end )
+
+## Collaborators of Fall 2025 Updates
+* Dominique Bissey
+* Eric Eleam
+* Noah Peles
+* Henry Schoemer
+* Ryan Windle

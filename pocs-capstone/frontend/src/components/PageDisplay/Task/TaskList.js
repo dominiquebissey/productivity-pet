@@ -16,7 +16,10 @@ const TaskList = ({ showAll, filterTags, filterTaskType }) => {
     }
     let showTasks = handlers?.taskList.filter(task => {
         const now = new Date();
+        now.setHours(0, 0, 0, 0);
         const due = task.due_date ? new Date(task.due_date) : null;
+
+        if (due) due.setDate(due.getDate() + 1); // Include due date day
 
         if (showAll === 'all') {
             if (task.completed) return false;
