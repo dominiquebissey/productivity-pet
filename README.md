@@ -1,7 +1,7 @@
 [![Open in Codespaces](https://classroom.github.com/assets/launch-codespace-f4981d0f882b2a3f0472912d15f9806d57e124e0fc890972558857b51b24a6f9.svg)](https://classroom.github.com/open-in-codespaces?assignment_repo_id=9911786)
 <div align="center">
 
-# Study Buddy
+# Productivty Pet
 [![Documentation Website Link](https://img.shields.io/badge/-Documentation%20Site-hotpink)](https://capstone-projects-2023-spring.github.io/project-virtual-pet/)
 [![Resources Link](https://img.shields.io/badge/-Resources-9cf)](https://capstone-projects-2023-spring.github.io/project-virtual-pet/resources/Links)
 
@@ -9,15 +9,6 @@
 
 
 </div>
-
-## Directions
-
-* Please navigate to our app by clicking [this link](https://studybuddy.life/). (NOTE: DNS propagation takes a long time with Temple University so the link to the site will not work when using the school's wi-fi - tusecurewireless. Please connect from another network). Once there, you can create an account, select a pet, and explore the site. 
-* Study Buddy is a Progressive Web App (PWA). This means it's a web site that you can use in your browser, or it can be downloaded to your device and used like an app. 
-   * On iOS: Open Safari and navigate to the site. Press the "Share" button and select "Add to Home Screen" from the popup. Lastly, tap "Add" in the top right corner to finish installing the PWA. It will now be on your home screen.
-   * On Android: Open Chrome and navigate to the site. Press the "three dot" icon in the upper right to open the menu. Select "Add to Home screen." Press the "Add" button in the popup. The PWA is now installed and available on your home screen.
-![Study buddy pwa instructions!](https://user-images.githubusercontent.com/73796086/227796829-3a226862-e33f-45ff-bac6-83efcccd883a.png)
-* If you encounter any bugs or issues, please visit our <a href="https://capstone-projects-2023-spring.github.io/project-virtual-pet/">documentation site</a> and click on the "Report Bug" button located on the right-hand side of the page. This will take you to a feedback form where you can provide details about the problem you encountered.
 
 ## Keywords
 
